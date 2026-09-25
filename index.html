@@ -3,84 +3,131 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>M47 Logistics Voice Agent — Marina Camacho</title>
+  <meta name="description" content="Personal demo: voice agent for package tracking by Marina Camacho." />
+  <title>Logistics Voice Agent — Marina Camacho</title>
   <style>
     :root {
-      --bg: #0f1419;
-      --card: #1a2332;
-      --text: #e7ecf3;
-      --muted: #9aa8bc;
-      --accent: #6ea8fe;
-      --border: #2a3648;
+      --bg: #0b0f14;
+      --card: #121a24;
+      --text: #e8eef6;
+      --muted: #93a1b3;
+      --accent: #7aa2ff;
+      --border: #243041;
+      --ok: #3dd68c;
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      background: radial-gradient(1200px 600px at 20% -10%, #1b2a44, var(--bg));
+      background:
+        radial-gradient(900px 420px at 12% -8%, #1a2740 0%, transparent 60%),
+        var(--bg);
       color: var(--text);
       min-height: 100vh;
-      line-height: 1.5;
+      line-height: 1.55;
     }
     main {
       max-width: 720px;
       margin: 0 auto;
-      padding: 48px 20px 120px;
+      padding: 56px 20px 140px;
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin: 0 0 10px;
     }
     h1 {
-      font-size: 1.6rem;
+      font-size: clamp(1.5rem, 2.5vw, 1.85rem);
       font-weight: 650;
-      margin: 0 0 8px;
+      margin: 0 0 10px;
+      letter-spacing: -0.02em;
     }
-    .sub {
+    .lede {
       color: var(--muted);
       margin: 0 0 28px;
+      max-width: 54ch;
     }
     .card {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 20px 22px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
     h2 {
-      font-size: 1rem;
-      margin: 0 0 10px;
+      font-size: 0.95rem;
+      margin: 0 0 12px;
       font-weight: 600;
     }
-    ul {
-      margin: 0;
-      padding-left: 1.1rem;
-      color: var(--muted);
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
     }
-    li { margin: 6px 0; }
+    th, td {
+      text-align: left;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    th {
+      color: var(--muted);
+      font-weight: 500;
+      width: 34%;
+    }
+    tr:last-child th, tr:last-child td { border-bottom: none; }
     code {
       color: var(--accent);
       font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: 0.92em;
+      font-size: 0.9em;
     }
-    .hint {
+    .meta {
       color: var(--muted);
-      font-size: 0.95rem;
-      margin-top: 8px;
+      font-size: 0.9rem;
+      margin: 0;
+    }
+    .dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--ok);
+      margin-right: 8px;
+      vertical-align: middle;
     }
   </style>
 </head>
 <body>
   <main>
-    <h1>M47 Logistics Voice Agent</h1>
-    <p class="sub">Home assessment · Conversational AI Engineer · Marina Camacho</p>
+    <p class="eyebrow">Personal demo</p>
+    <h1>Logistics Voice Agent</h1>
+    <p class="lede">
+      Voice assistant for shipment lookup: validates IDs, calls a mock API,
+      explains delays clearly, and never invents status or refunds.
+    </p>
 
     <div class="card">
-      <h2>How to try it</h2>
-      <ul>
-        <li>Use the voice widget (bottom-right). Allow microphone access.</li>
-        <li>Happy path: say <code>FE-2026</code></li>
-        <li>Not found: say <code>FE-9999</code></li>
-        <li>Invalid format: say <code>ABC-12</code></li>
-        <li>Refund safety: say <code>I want a refund</code></li>
-      </ul>
-      <p class="hint">The agent validates FE- + 4 digits, calls a Beeceptor mock API, and never promises refunds.</p>
+      <h2>Try the widget</h2>
+      <p class="meta" style="margin-bottom:12px"><span class="dot"></span>Allow microphone, then use one of these prompts</p>
+      <table>
+        <tbody>
+          <tr><th><code>FE-2026</code></th><td>Known shipment — status, location, ETA</td></tr>
+          <tr><th><code>FE-9999</code></th><td>Not found — no hallucinated data</td></tr>
+          <tr><th><code>ABC-12</code></th><td>Invalid format — rejected before the API call</td></tr>
+          <tr><th>“I want a refund”</th><td>No unauthorized commitments; offers human handoff</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Design notes</h2>
+      <p class="meta">
+        Thin tool boundary (API only) · prompt owns validation and safety ·
+        mock API owns success vs 404. Built by Marina Camacho.
+      </p>
     </div>
   </main>
 
